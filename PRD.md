@@ -27,11 +27,11 @@ A dynamic GitHub README profile generator that helps users create personalized, 
 - **Success criteria**: Preview updates within 100ms of input change, accurately represents GitHub's markdown rendering
 
 ### Content Customization
-- **Functionality**: Input fields for name, tagline, bio, skills list, social links, and badge selections
-- **Purpose**: Personalizes the profile with user-specific information
-- **Trigger**: User types in input fields or selects from dropdowns
-- **Progression**: Focus input → Enter text → See formatted result in preview → Refine content
-- **Success criteria**: All inputs persist during session, support common markdown enhancements, validate URLs
+- **Functionality**: Input fields for name, tagline, bio, skills list, social links, badge selections, and GitHub stats with automatic username detection
+- **Purpose**: Personalizes the profile with user-specific information while reducing manual entry through smart defaults
+- **Trigger**: User types in input fields, selects from dropdowns, or clicks the "Use my username" button in stats section
+- **Progression**: Focus input → Enter text OR click auto-fill → See formatted result in preview → Refine content
+- **Success criteria**: All inputs persist during session, support common markdown enhancements, validate URLs, automatically populate GitHub username when stats section is added
 
 ### Export Options
 - **Functionality**: Copy markdown to clipboard or download as README.md file
@@ -109,7 +109,7 @@ Animations should feel snappy and purposeful, reinforcing the immediate feedback
   - Code (markdown view toggle)
   - Eye (preview toggle)
   - GithubLogo (social/stats)
-  - User (profile sections)
+  - User (profile sections, auto-fill username in stats)
   
 - **Spacing**: 
   - Container padding: p-6 (24px)
