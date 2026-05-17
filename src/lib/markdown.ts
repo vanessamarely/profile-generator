@@ -19,6 +19,10 @@ export function generateMarkdown(sections: Section[]): string {
         return generateTechStack(section.data);
       case 'streaming':
         return generateStreaming(section.data);
+      case 'trophy':
+        return generateTrophy(section.data);
+      case 'contributions':
+        return generateContributions(section.data);
       default:
         return '';
     }
@@ -187,4 +191,36 @@ function generateStreaming(data: any): string {
   }
 
   return md.trim();
+}
+
+function generateTrophy(data: any): string {
+  if (!data.username) return '';
+
+  const params = new URLSearchParams();
+  params.append('username', data.username);
+  params.append('theme', data.theme || 'radical');
+  params.append('column', data.columns?.toString() || '8');
+  params.append('margin-w', data.marginWidth?.toString() || '5');
+  params.append('margin-h', data.marginHeight?.toString() || '5');
+  
+  if (data.noFrame) params.append('no-frame', 'true');
+  if (data.noBackground) params.append('no-bg', 'true');
+
+  const url = `https://github-profile-trophy.vercel.app/?${params.toString()}`;
+  
+  return `## 🏆 GitHub Trophies\n\n![Trophies](${url})`;
+}
+
+function generateContributions(data: any): string {
+  if (!data.username) return '';
+
+  const params = new URLSearchParams();
+  params.append('user', data.username);
+  params.append('theme', data.theme || 'radical');
+  
+  if (data.hideTitle) params.append('hide_title', 'true');
+
+  const url = `https://github-readme-activity-graph.vercel.app/graph?${params.toString()}`;
+  
+  return `## 📊 Contribution Graph\n\n![Contributions](${url})`;
 }

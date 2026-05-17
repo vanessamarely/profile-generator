@@ -6,7 +6,9 @@ export type SectionType =
   | 'badges'
   | 'socials'
   | 'techstack'
-  | 'streaming';
+  | 'streaming'
+  | 'trophy'
+  | 'contributions';
 
 export interface Section {
   id: string;
@@ -84,6 +86,28 @@ export const sectionTemplates = {
     defaultData: {
       channels: [] as { platform: string; url: string; username: string }[],
       videos: [] as { title: string; url: string; videoId: string }[],
+    }
+  },
+  trophy: {
+    name: 'GitHub Trophies',
+    description: 'Achievement showcase',
+    defaultData: {
+      username: '',
+      theme: 'radical',
+      columns: 8,
+      noFrame: false,
+      noBackground: false,
+      marginWidth: 5,
+      marginHeight: 5,
+    }
+  },
+  contributions: {
+    name: 'Contribution Graph',
+    description: 'Activity heatmap',
+    defaultData: {
+      username: '',
+      theme: 'radical',
+      hideTitle: false,
     }
   },
 };

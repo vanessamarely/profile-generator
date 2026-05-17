@@ -10,7 +10,9 @@ import { BadgesEditor } from '@/components/editors/BadgesEditor';
 import { SocialsEditor } from '@/components/editors/SocialsEditor';
 import { TechStackEditor } from '@/components/editors/TechStackEditor';
 import { StreamingEditor } from '@/components/editors/StreamingEditor';
-import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link, DotsSixVertical, Code, Video } from '@phosphor-icons/react';
+import { TrophyEditor } from '@/components/editors/TrophyEditor';
+import { ContributionsEditor } from '@/components/editors/ContributionsEditor';
+import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link, DotsSixVertical, Code, Video, Trophy, ChartLine } from '@phosphor-icons/react';
 import { Reorder, useDragControls } from 'framer-motion';
 
 interface SectionBuilderProps {
@@ -29,6 +31,8 @@ function getSectionIcon(type: SectionType) {
     case 'socials': return <Link />;
     case 'techstack': return <Code weight="duotone" />;
     case 'streaming': return <Video weight="duotone" />;
+    case 'trophy': return <Trophy weight="duotone" />;
+    case 'contributions': return <ChartLine weight="duotone" />;
   }
 }
 
@@ -50,6 +54,10 @@ function getSectionEditor(section: Section, onChange: (data: any) => void) {
       return <TechStackEditor data={section.data as any} onChange={onChange} />;
     case 'streaming':
       return <StreamingEditor data={section.data as any} onChange={onChange} />;
+    case 'trophy':
+      return <TrophyEditor data={section.data as any} onChange={onChange} />;
+    case 'contributions':
+      return <ContributionsEditor data={section.data as any} onChange={onChange} />;
   }
 }
 
