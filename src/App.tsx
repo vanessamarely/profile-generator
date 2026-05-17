@@ -55,30 +55,6 @@ function App() {
     }
   };
 
-  const downloadFile = () => {
-    try {
-      const markdown = generateMarkdown(currentSections);
-      const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'README.md';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      
-      setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }, 100);
-      
-      toast.success('Downloaded README.md');
-    } catch (err) {
-      toast.error('Failed to download file');
-      console.error('Download error:', err);
-    }
-  };
-
   const openPreviewDialog = () => {
     setPreviewDialogOpen(true);
   };
@@ -156,7 +132,7 @@ function App() {
             </Button>
             <Button onClick={openPreviewDialog} disabled={currentSections.length === 0} variant="outline" className="gap-2">
               <DownloadSimple weight="bold" />
-              Download
+              Preview & Export
             </Button>
           </div>
 
@@ -164,7 +140,6 @@ function App() {
             open={previewDialogOpen}
             onOpenChange={setPreviewDialogOpen}
             markdown={generateMarkdown(currentSections)}
-            onDownload={downloadFile}
           />
 
           {isMobile ? (

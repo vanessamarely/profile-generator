@@ -9,16 +9,22 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CopySimple, DownloadSimple } from '@phosphor-icons/react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { CopySimple, DownloadSimple, CaretDown, FilePdf, FileHtml, FileText } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { Marked } from 'marked';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { exportAsMarkdown, exportAsHTML, exportAsPDF } from '@/lib/exporters';
 
 interface MarkdownPreviewDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   markdown: string;
-  onDownload: () => void;
 }
 
 const marked = new Marked();
@@ -27,8 +33,8 @@ export function MarkdownPreviewDialog({
   open,
   onOpenChange,
   markdown,
-  onDownload,
 }: MarkdownPreviewDialogProps) {
+  const [isExporting, setIsExporting] = useState(false);
   const html = useMemo(() => marked.parse(markdown) as string, [markdown]);
 
   const copyMarkdown = async () => {
@@ -40,18 +46,39 @@ export function MarkdownPreviewDialog({
     }
   };
 
-  const handleDownload = () => {
-    onDownload();
-    onOpenChange(false);
+  const handleExport = async (format: 'markdown' | 'html' | 'pdf') => {
+    setIsExporting(true);
+    try {
+      switch (format) {
+        case 'markdown':
+          await exportAsMarkdown(markdown);
+          toast.success('Downloaded README.md');
+          break;
+        case 'html':
+          await exportAsHTML(markdown);
+          toast.success('Downloaded README.html');
+          break;
+        case 'pdf':
+          await exportAsPDF(markdown);
+          toast.success('Opening print dialog for PDF export');
+          break;
+      }
+      onOpenChange(false);
+    } catch (err) {
+      console.error('Export error:', err);
+      toast.error(`Failed to export as ${format.toUpperCase()}`);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-5xl max-h-[85vh] flex flex-col">
         <DialogHeader>
-          <DialogTitle>Preview Your README</DialogTitle>
+          <DialogTitle>Preview & Export Your README</DialogTitle>
           <DialogDescription>
-            Review your generated markdown before downloading
+            Review your generated markdown and export in multiple formats
           </DialogDescription>
         </DialogHeader>
 
@@ -84,10 +111,38 @@ export function MarkdownPreviewDialog({
             <CopySimple weight="bold" />
             Copy Markdown
           </Button>
-          <Button onClick={handleDownload} className="gap-2">
-            <DownloadSimple weight="bold" />
-            Download README.md
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="gap-2" disabled={isExporting}>
+                <DownloadSimple weight="bold" />
+                Export
+                <CaretDown weight="bold" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={() => handleExport('markdown')} className="gap-2">
+                <FileText weight="fill" className="text-accent" />
+                <div>
+                  <div className="font-medium">Markdown</div>
+                  <div className="text-xs text-muted-foreground">Download as .md file</div>
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('html')} className="gap-2">
+                <FileHtml weight="fill" className="text-accent" />
+                <div>
+                  <div className="font-medium">HTML</div>
+                  <div className="text-xs text-muted-foreground">Download as .html file</div>
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('pdf')} className="gap-2">
+                <FilePdf weight="fill" className="text-accent" />
+                <div>
+                  <div className="font-medium">PDF</div>
+                  <div className="text-xs text-muted-foreground">Print to PDF</div>
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </DialogFooter>
       </DialogContent>
     </Dialog>
