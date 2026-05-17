@@ -135,19 +135,33 @@ function generateTechStack(data: any): string {
 }
 
 function generateStreaming(data: any): string {
-  if (!data.channels || data.channels.length === 0) return '';
+  if ((!data.channels || data.channels.length === 0) && (!data.videos || data.videos.length === 0)) {
+    return '';
+  }
 
   let md = '## 📺 Video & Streaming\n\n';
 
-  data.channels.forEach((channel: { platform: string; url: string; username: string }) => {
-    if (channel.platform === 'YouTube') {
-      md += `[![YouTube](https://img.shields.io/youtube/channel/subscribers/${channel.username}?label=${encodeURIComponent(channel.platform)}&style=social)](${channel.url})\n`;
-    } else if (channel.platform === 'Twitch') {
-      md += `[![Twitch Status](https://img.shields.io/twitch/status/${channel.username}?style=social&label=${encodeURIComponent(channel.platform)})](${channel.url})\n`;
-    } else {
-      md += `[![${channel.platform}](https://img.shields.io/badge/${encodeURIComponent(channel.platform)}-${encodeURIComponent(channel.username)}-red?style=social)](${channel.url})\n`;
-    }
-  });
+  if (data.channels && data.channels.length > 0) {
+    md += '### Channels\n\n';
+    data.channels.forEach((channel: { platform: string; url: string; username: string }) => {
+      if (channel.platform === 'YouTube') {
+        md += `[![YouTube](https://img.shields.io/youtube/channel/subscribers/${channel.username}?label=${encodeURIComponent(channel.platform)}&style=social)](${channel.url})\n`;
+      } else if (channel.platform === 'Twitch') {
+        md += `[![Twitch Status](https://img.shields.io/twitch/status/${channel.username}?style=social&label=${encodeURIComponent(channel.platform)})](${channel.url})\n`;
+      } else {
+        md += `[![${channel.platform}](https://img.shields.io/badge/${encodeURIComponent(channel.platform)}-${encodeURIComponent(channel.username)}-red?style=social)](${channel.url})\n`;
+      }
+    });
+    md += '\n';
+  }
+
+  if (data.videos && data.videos.length > 0) {
+    md += '### Latest Videos\n\n';
+    data.videos.forEach((video: { title: string; url: string; videoId: string }) => {
+      const thumbnailUrl = `https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg`;
+      md += `[![${video.title}](${thumbnailUrl})](${video.url})\n`;
+    });
+  }
 
   return md.trim();
 }

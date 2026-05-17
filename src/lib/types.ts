@@ -83,6 +83,7 @@ export const sectionTemplates = {
     description: 'YouTube/Twitch channels',
     defaultData: {
       channels: [] as { platform: string; url: string; username: string }[],
+      videos: [] as { title: string; url: string; videoId: string }[],
     }
   },
 };
