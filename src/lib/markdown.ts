@@ -248,7 +248,7 @@ function generateStreaming(data: any): string {
       if (channel.platform === 'YouTube') {
         md += `[![YouTube](https://img.shields.io/youtube/channel/subscribers/${channel.username}?label=${encodeURIComponent(channel.platform)}&style=social)](${channel.url})\n`;
       } else if (channel.platform === 'Twitch') {
-        md += `[![Twitch Status](https://img.shields.io/twitch/status/${channel.username}?style=social&label=${encodeURIComponent(channel.platform)})](${channel.url})\n`;
+        md += `[![Twitch](https://img.shields.io/twitch/followers/${channel.username}?style=social&label=${encodeURIComponent(channel.platform)})](${channel.url})\n`;
       } else {
         md += `[![${channel.platform}](https://img.shields.io/badge/${encodeURIComponent(channel.platform)}-${encodeURIComponent(channel.username)}-red?style=social)](${channel.url})\n`;
       }
