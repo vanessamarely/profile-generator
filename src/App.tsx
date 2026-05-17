@@ -12,10 +12,13 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Toaster } from '@/components/ui/sonner';
 import { Reorder } from 'framer-motion';
+import { MarkdownPreviewDialog } from '@/components/MarkdownPreviewDialog';
+import { useState } from 'react';
 
 function App() {
   const isMobile = useIsMobile();
   const [sections, setSections] = useKV<Section[]>('readme-sections', []);
+  const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
 
   const currentSections = sections || [];
 
@@ -74,6 +77,10 @@ function App() {
       toast.error('Failed to download file');
       console.error('Download error:', err);
     }
+  };
+
+  const openPreviewDialog = () => {
+    setPreviewDialogOpen(true);
   };
 
   const sectionTypes = Object.entries(sectionTemplates);
@@ -147,11 +154,18 @@ function App() {
               <CopySimple weight="bold" />
               Copy Markdown
             </Button>
-            <Button onClick={downloadFile} disabled={currentSections.length === 0} variant="outline" className="gap-2">
+            <Button onClick={openPreviewDialog} disabled={currentSections.length === 0} variant="outline" className="gap-2">
               <DownloadSimple weight="bold" />
               Download
             </Button>
           </div>
+
+          <MarkdownPreviewDialog
+            open={previewDialogOpen}
+            onOpenChange={setPreviewDialogOpen}
+            markdown={generateMarkdown(currentSections)}
+            onDownload={downloadFile}
+          />
 
           {isMobile ? (
             <Tabs defaultValue="edit" className="w-full">
