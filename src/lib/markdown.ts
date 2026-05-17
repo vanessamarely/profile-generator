@@ -111,7 +111,7 @@ function generateStats(data: any): string {
   }
   
   if (data.showLanguages) {
-    const langsUrl = `https://github-readme-stats.vercel.app/api/top-langs?username=${encodeURIComponent(data.username)}&layout=compact&theme=${encodeURIComponent(theme)}&hide_border=false`;
+    const langsUrl = `https://github-readme-stats.vercel.app/api/top-langs/?username=${encodeURIComponent(data.username)}&layout=compact&theme=${encodeURIComponent(theme)}&hide_border=false`;
     images.push(`![Top Languages](${langsUrl})`);
   }
   
