@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Toaster } from '@/components/ui/sonner';
+import { Reorder } from 'framer-motion';
 
 function App() {
   const isMobile = useIsMobile();
@@ -67,6 +68,10 @@ function App() {
 
   const sectionTypes = Object.entries(sectionTemplates);
 
+  const handleReorder = (newOrder: Section[]) => {
+    setSections(newOrder);
+  };
+
   const editorContent = (
     <div className="space-y-4">
       <Card className="p-5">
@@ -88,7 +93,7 @@ function App() {
         </div>
       </Card>
 
-      <div className="space-y-4">
+      <Reorder.Group axis="y" values={currentSections} onReorder={handleReorder} className="space-y-4">
         {currentSections.map((section) => (
           <SectionBuilder
             key={section.id}
@@ -97,7 +102,7 @@ function App() {
             onRemove={() => removeSection(section.id)}
           />
         ))}
-      </div>
+      </Reorder.Group>
 
       {currentSections.length === 0 && (
         <Card className="p-12 text-center">

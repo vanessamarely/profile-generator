@@ -8,8 +8,8 @@ import { SkillsEditor } from '@/components/editors/SkillsEditor';
 import { StatsEditor } from '@/components/editors/StatsEditor';
 import { BadgesEditor } from '@/components/editors/BadgesEditor';
 import { SocialsEditor } from '@/components/editors/SocialsEditor';
-import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link } from '@phosphor-icons/react';
-import { motion } from 'framer-motion';
+import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link, DotsSixVertical } from '@phosphor-icons/react';
+import { Reorder, useDragControls } from 'framer-motion';
 
 interface SectionBuilderProps {
   section: Section;
@@ -47,17 +47,29 @@ function getSectionEditor(section: Section, onChange: (data: any) => void) {
 
 export function SectionBuilder({ section, onUpdate, onRemove }: SectionBuilderProps) {
   const template = sectionTemplates[section.type];
+  const dragControls = useDragControls();
   
   return (
-    <motion.div
+    <Reorder.Item
+      value={section}
+      dragListener={false}
+      dragControls={dragControls}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.2 }}
+      whileDrag={{ scale: 1.02, boxShadow: "0 8px 24px rgba(0,0,0,0.15)" }}
     >
-      <Card className="p-5">
+      <Card className="p-5 relative">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-2">
+            <button
+              onPointerDown={(e) => dragControls.start(e)}
+              className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-accent transition-colors touch-none p-1 -ml-1"
+              aria-label="Drag to reorder"
+            >
+              <DotsSixVertical size={24} weight="bold" />
+            </button>
             <div className="text-accent">
               {getSectionIcon(section.type)}
             </div>
@@ -78,6 +90,6 @@ export function SectionBuilder({ section, onUpdate, onRemove }: SectionBuilderPr
         <Separator className="mb-4" />
         {getSectionEditor(section, onUpdate)}
       </Card>
-    </motion.div>
+    </Reorder.Item>
   );
 }
