@@ -132,7 +132,7 @@ function App() {
             </Button>
             <Button onClick={openPreviewDialog} disabled={currentSections.length === 0} variant="outline" className="gap-2">
               <DownloadSimple weight="bold" />
-              Preview & Export
+              Download
             </Button>
           </div>
 
@@ -140,7 +140,6 @@ function App() {
             open={previewDialogOpen}
             onOpenChange={setPreviewDialogOpen}
             markdown={generateMarkdown(currentSections)}
-          />
 
           {isMobile ? (
             <Tabs defaultValue="edit" className="w-full">
