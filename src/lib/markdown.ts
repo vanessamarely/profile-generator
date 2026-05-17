@@ -23,6 +23,8 @@ export function generateMarkdown(sections: Section[]): string {
         return generateTrophy(section.data);
       case 'contributions':
         return generateContributions(section.data);
+      case 'certifications':
+        return generateCertifications(section.data);
       default:
         return '';
     }
@@ -256,4 +258,38 @@ function generateContributions(data: any): string {
   const url = `https://github-readme-activity-graph.vercel.app/graph?${params.toString()}`;
   
   return `## 📊 Contribution Graph\n\n![Contributions](${url})`;
+}
+
+function generateCertifications(data: any): string {
+  if (!data.certifications || data.certifications.length === 0) return '';
+
+  let md = '## 🏅 Certifications & Achievements\n\n';
+
+  data.certifications.forEach((cert: any) => {
+    const label = encodeURIComponent(cert.name);
+    const message = encodeURIComponent(cert.issuer);
+    const color = cert.color || '0066CC';
+    const logo = cert.icon || 'certificate';
+    
+    const badgeUrl = `https://img.shields.io/badge/${label}-${message}-${color}?style=for-the-badge&logo=${logo}&logoColor=white`;
+    const badgeMarkdown = `![${cert.name}](${badgeUrl})`;
+    
+    if (cert.credentialUrl) {
+      md += `[${badgeMarkdown}](${cert.credentialUrl})`;
+    } else {
+      md += badgeMarkdown;
+    }
+    
+    if (cert.date || cert.credentialId || cert.description) {
+      md += '\n';
+      if (cert.date) md += `  \n📅 ${cert.date}`;
+      if (cert.credentialId) md += `  \n🔖 ID: ${cert.credentialId}`;
+      if (cert.description) md += `  \n📝 ${cert.description}`;
+      md += '\n';
+    }
+    
+    md += '\n';
+  });
+
+  return md.trim();
 }

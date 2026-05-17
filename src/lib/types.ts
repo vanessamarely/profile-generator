@@ -8,7 +8,8 @@ export type SectionType =
   | 'techstack'
   | 'streaming'
   | 'trophy'
-  | 'contributions';
+  | 'contributions'
+  | 'certifications';
 
 export interface Section {
   id: string;
@@ -118,6 +119,23 @@ export const sectionTemplates = {
       username: '',
       theme: 'radical',
       hideTitle: false,
+    }
+  },
+  certifications: {
+    name: 'Certifications',
+    description: 'Achievements & certs',
+    defaultData: {
+      certifications: [] as Array<{
+        template: string;
+        name: string;
+        issuer: string;
+        date?: string;
+        credentialId?: string;
+        credentialUrl?: string;
+        icon?: string;
+        color?: string;
+        description?: string;
+      }>,
     }
   },
 };

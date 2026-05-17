@@ -12,7 +12,8 @@ import { TechStackEditor } from '@/components/editors/TechStackEditor';
 import { StreamingEditor } from '@/components/editors/StreamingEditor';
 import { TrophyEditor } from '@/components/editors/TrophyEditor';
 import { ContributionsEditor } from '@/components/editors/ContributionsEditor';
-import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link, DotsSixVertical, Code, Video, Trophy, ChartLine } from '@phosphor-icons/react';
+import { CertificationsEditor } from '@/components/editors/CertificationsEditor';
+import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link, DotsSixVertical, Code, Video, Trophy, ChartLine, Certificate } from '@phosphor-icons/react';
 import { Reorder, useDragControls } from 'framer-motion';
 
 interface SectionBuilderProps {
@@ -33,6 +34,7 @@ function getSectionIcon(type: SectionType) {
     case 'streaming': return <Video weight="duotone" />;
     case 'trophy': return <Trophy weight="duotone" />;
     case 'contributions': return <ChartLine weight="duotone" />;
+    case 'certifications': return <Certificate weight="duotone" />;
   }
 }
 
@@ -58,6 +60,8 @@ function getSectionEditor(section: Section, onChange: (data: any) => void) {
       return <TrophyEditor data={section.data as any} onChange={onChange} />;
     case 'contributions':
       return <ContributionsEditor data={section.data as any} onChange={onChange} />;
+    case 'certifications':
+      return <CertificationsEditor data={section.data as any} onChange={onChange} />;
   }
 }
 
