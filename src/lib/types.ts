@@ -59,7 +59,17 @@ export const sectionTemplates = {
     name: 'Badges',
     description: 'Tech badges',
     defaultData: {
-      badges: [] as string[],
+      badges: [] as Array<{
+        type: 'simple' | 'custom';
+        label: string;
+        message?: string;
+        color?: string;
+        logo?: string;
+        logoColor?: string;
+        style?: 'flat' | 'flat-square' | 'for-the-badge' | 'plastic' | 'social';
+        labelColor?: string;
+        link?: string;
+      }>,
     }
   },
   socials: {

@@ -86,9 +86,42 @@ function generateStats(data: any): string {
 function generateBadges(data: any): string {
   if (!data.badges || data.badges.length === 0) return '';
   
-  const badgeUrls = data.badges.map((badge: string) => {
-    const normalized = badge.toLowerCase().replace(/\s+/g, '-');
-    return `![${badge}](https://img.shields.io/badge/${encodeURIComponent(badge)}-000000?style=for-the-badge&logo=${normalized}&logoColor=white)`;
+  const badgeUrls = data.badges.map((badge: any) => {
+    let badgeUrl = '';
+    
+    if (badge.type === 'simple') {
+      const normalized = badge.label.toLowerCase().replace(/\s+/g, '-');
+      badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(badge.label)}-000000?style=for-the-badge&logo=${normalized}&logoColor=white`;
+    } else {
+      const params = new URLSearchParams();
+      const style = badge.style || 'for-the-badge';
+      
+      if (badge.message) {
+        badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(badge.label)}-${encodeURIComponent(badge.message)}-${badge.color || '000000'}`;
+      } else {
+        badgeUrl = `https://img.shields.io/badge/${encodeURIComponent(badge.label)}-${badge.color || '000000'}`;
+      }
+      
+      badgeUrl += `?style=${style}`;
+      
+      if (badge.logo) {
+        badgeUrl += `&logo=${encodeURIComponent(badge.logo)}`;
+      }
+      if (badge.logoColor) {
+        badgeUrl += `&logoColor=${encodeURIComponent(badge.logoColor)}`;
+      }
+      if (badge.labelColor) {
+        badgeUrl += `&labelColor=${encodeURIComponent(badge.labelColor)}`;
+      }
+    }
+    
+    const badgeMarkdown = `![${badge.label}](${badgeUrl})`;
+    
+    if (badge.link) {
+      return `[${badgeMarkdown}](${badge.link})`;
+    }
+    
+    return badgeMarkdown;
   }).join(' ');
   
   return `## Tech Stack\n\n${badgeUrls}`;

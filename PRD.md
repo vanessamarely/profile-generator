@@ -13,7 +13,7 @@ A dynamic GitHub README profile generator that helps users create personalized, 
 ## Essential Features
 
 ### Section Management
-- **Functionality**: Add, remove, reorder, and customize profile sections (header, about me, skills, GitHub stats, badges, social links with images, tech stack code view, streaming/video channels)
+- **Functionality**: Add, remove, reorder, and customize profile sections (header, about me, skills, GitHub stats, custom badges with shields.io integration, social links with images, tech stack code view, streaming/video channels, trophies, contributions)
 - **Purpose**: Allows users to build a personalized profile structure that reflects their unique developer identity
 - **Trigger**: User clicks section buttons in the builder panel
 - **Progression**: Select section type → Configure section content via form → See live preview update → Adjust styling/content → Continue adding sections
@@ -27,11 +27,18 @@ A dynamic GitHub README profile generator that helps users create personalized, 
 - **Success criteria**: Preview updates within 100ms of input change, accurately represents GitHub's markdown rendering
 
 ### Content Customization
-- **Functionality**: Input fields for name, tagline, bio, skills list, social links with platform-specific badges and icons, badge selections, personal websites/blog URLs, and GitHub stats with automatic username detection and customizable theme styles (dark mode, gradient, neon)
-- **Purpose**: Personalizes the profile with user-specific information while reducing manual entry through smart defaults, visual theme selection, and professional-looking social badges
-- **Trigger**: User types in input fields, selects from dropdowns, clicks the "Use my username" button in stats section, selects social platform from predefined list, or selects a theme style for GitHub stats
-- **Progression**: Focus input → Enter text OR click auto-fill → Select platform (Twitter, LinkedIn, GitHub, Medium, Dev.to, YouTube, etc.) → Add username if required → Select theme style from visual options → See formatted result with colorful badges in preview → Refine content
-- **Success criteria**: All inputs persist during session, support common markdown enhancements, validate URLs, automatically populate GitHub username when stats section is added, theme selection updates preview immediately with visual feedback, social links display with proper logos and colors
+- **Functionality**: Input fields for name, tagline, bio, skills list, social links with platform-specific badges and icons, custom shield badges with full customization (colors, logos, styles, links), personal websites/blog URLs, and GitHub stats with automatic username detection and customizable theme styles (dark mode, gradient, neon)
+- **Purpose**: Personalizes the profile with user-specific information while reducing manual entry through smart defaults, visual theme selection, professional-looking social badges, and fully customizable shields.io badges
+- **Trigger**: User types in input fields, selects from dropdowns, clicks the "Use my username" button in stats section, selects social platform from predefined list, creates custom badges with shields.io options, or selects a theme style for GitHub stats
+- **Progression**: Focus input → Enter text OR click auto-fill → Select platform (Twitter, LinkedIn, GitHub, Medium, Dev.to, YouTube, etc.) → Add username if required → Create custom badges with label, message, color, logo, and style options → Select theme style from visual options → See formatted result with colorful badges in preview → Refine content
+- **Success criteria**: All inputs persist during session, support common markdown enhancements, validate URLs, automatically populate GitHub username when stats section is added, theme selection updates preview immediately with visual feedback, social links display with proper logos and colors, custom badges render correctly with all shields.io options
+
+### Custom Badge Builder (Shields.io Integration)
+- **Functionality**: Create professional-looking badges using shields.io API with full control over appearance (label, message, colors, logos, styles) and behavior (clickable links)
+- **Purpose**: Enables users to create beautiful, customized badges for technologies, certifications, status indicators, or any custom purpose beyond predefined options
+- **Trigger**: User selects Badges section and chooses between "Quick Add" (preset badges) or "Custom Badge" (full customization)
+- **Progression**: Select Custom Badge tab → Enter label and optional message → Choose color from palette or enter hex → Select badge style (for-the-badge, flat, flat-square, plastic, social) → Add logo name from Simple Icons → Set logo color → Add optional link URL → Preview badge in real-time → Add to collection → See in markdown preview
+- **Success criteria**: Badge preview updates instantly as fields change, all shields.io parameters work correctly, badges display with proper styling in preview, custom badges can be added/removed/reordered alongside quick badges, links work when exported to GitHub
 
 ### Export Options
 - **Functionality**: Copy markdown to clipboard or download as README.md file with proper error handling
@@ -115,6 +122,8 @@ Animations should feel snappy and purposeful, reinforcing the immediate feedback
   - Moon (dark mode theme)
   - Gradient (gradient theme)
   - Lightning (neon theme)
+  - Sparkle (quick add badge)
+  - Palette (custom badge editor)
   
 - **Spacing**: 
   - Container padding: p-6 (24px)
