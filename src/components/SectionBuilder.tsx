@@ -13,7 +13,7 @@ import { StreamingEditor } from '@/components/editors/StreamingEditor';
 import { TrophyEditor } from '@/components/editors/TrophyEditor';
 import { ContributionsEditor } from '@/components/editors/ContributionsEditor';
 import { CertificationsEditor } from '@/components/editors/CertificationsEditor';
-import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link, DotsSixVertical, Code, Video, Trophy, ChartLine, Certificate } from '@phosphor-icons/react';
+import { Trash, User, TextAlignLeft, Lightning, ChartBar, Link, DotsSixVertical, Code, Video, Trophy, ChartLine, Certificate } from '@phosphor-icons/react';
 import { Reorder, useDragControls } from 'framer-motion';
 
 interface SectionBuilderProps {
@@ -28,7 +28,7 @@ function getSectionIcon(type: SectionType) {
     case 'about': return <TextAlignLeft />;
     case 'skills': return <Lightning />;
     case 'stats': return <ChartBar />;
-    case 'badges': return <IconContext.Provider value={{ weight: 'duotone' }}><Lightning /></IconContext.Provider>;
+    case 'badges': return <Lightning weight="duotone" />;
     case 'socials': return <Link />;
     case 'techstack': return <Code weight="duotone" />;
     case 'streaming': return <Video weight="duotone" />;
