@@ -140,6 +140,7 @@ function App() {
             open={previewDialogOpen}
             onOpenChange={setPreviewDialogOpen}
             markdown={generateMarkdown(currentSections)}
+          />
 
           {isMobile ? (
             <Tabs defaultValue="edit" className="w-full">
