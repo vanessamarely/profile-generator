@@ -4,7 +4,9 @@ export type SectionType =
   | 'skills'
   | 'stats'
   | 'badges'
-  | 'socials';
+  | 'socials'
+  | 'techstack'
+  | 'streaming';
 
 export interface Section {
   id: string;
@@ -63,6 +65,24 @@ export const sectionTemplates = {
     description: 'Contact and profiles',
     defaultData: {
       links: [] as { platform: string; url: string }[],
+    }
+  },
+  techstack: {
+    name: 'Tech Stack (Code)',
+    description: 'Code-style tech overview',
+    defaultData: {
+      variableName: 'yourname',
+      code: [] as string[],
+      tools: [] as string[],
+      architecture: [] as string[],
+      customFields: [] as { key: string; value: string }[],
+    }
+  },
+  streaming: {
+    name: 'Video & Streaming',
+    description: 'YouTube/Twitch channels',
+    defaultData: {
+      channels: [] as { platform: string; url: string; username: string }[],
     }
   },
 };

@@ -15,6 +15,10 @@ export function generateMarkdown(sections: Section[]): string {
         return generateBadges(section.data);
       case 'socials':
         return generateSocials(section.data);
+      case 'techstack':
+        return generateTechStack(section.data);
+      case 'streaming':
+        return generateStreaming(section.data);
       default:
         return '';
     }
@@ -94,4 +98,56 @@ function generateSocials(data: any): string {
   ).join('\n');
   
   return `## Connect With Me\n\n${linkList}`;
+}
+
+function generateTechStack(data: any): string {
+  if (!data.variableName && data.code.length === 0 && data.tools.length === 0 && data.architecture.length === 0 && data.customFields.length === 0) {
+    return '';
+  }
+
+  const varName = data.variableName || 'developer';
+  let codeContent = `const ${varName} = {\n`;
+
+  if (data.code && data.code.length > 0) {
+    const codeArray = data.code.map((item: string) => `"${item}"`).join(', ');
+    codeContent += `  code: [${codeArray}],\n`;
+  }
+
+  if (data.tools && data.tools.length > 0) {
+    const toolsArray = data.tools.map((item: string) => `"${item}"`).join(', ');
+    codeContent += `  tools: [${toolsArray}],\n`;
+  }
+
+  if (data.architecture && data.architecture.length > 0) {
+    const archArray = data.architecture.map((item: string) => `"${item}"`).join(', ');
+    codeContent += `  architecture: [${archArray}],\n`;
+  }
+
+  if (data.customFields && data.customFields.length > 0) {
+    data.customFields.forEach((field: { key: string; value: string }) => {
+      codeContent += `  ${field.key}: "${field.value}",\n`;
+    });
+  }
+
+  codeContent += `}`;
+
+  return `## 💻 Tech Stack\n\n\`\`\`javascript\n${codeContent}\n\`\`\``;
+}
+
+function generateStreaming(data: any): string {
+  if (!data.channels || data.channels.length === 0) return '';
+
+  let md = '## 📺 Video & Streaming\n\n';
+
+  data.channels.forEach((channel: { platform: string; url: string; username: string }) => {
+    if (channel.platform === 'YouTube') {
+      md += `[![YouTube](https://img.shields.io/youtube/channel/subscribers/${channel.username}?label=${encodeURIComponent(channel.platform)}&style=social)](${channel.url})\n`;
+    } else if (channel.platform === 'Twitch') {
+      md += `[![Twitch Status](https://img.shields.io/twitch/status/${channel.username}?style=social&label=${encodeURIComponent(channel.platform)})](${channel.url})\n`;
+    } else {
+      md += `[![${channel.platform}](https://img.shields.io/badge/${encodeURIComponent(channel.platform)}-${encodeURIComponent(channel.username)}-red?style=social)](${channel.url})\n`;
+    }
+  });
+
+  return md.trim();
 }

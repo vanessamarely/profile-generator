@@ -8,7 +8,9 @@ import { SkillsEditor } from '@/components/editors/SkillsEditor';
 import { StatsEditor } from '@/components/editors/StatsEditor';
 import { BadgesEditor } from '@/components/editors/BadgesEditor';
 import { SocialsEditor } from '@/components/editors/SocialsEditor';
-import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link, DotsSixVertical } from '@phosphor-icons/react';
+import { TechStackEditor } from '@/components/editors/TechStackEditor';
+import { StreamingEditor } from '@/components/editors/StreamingEditor';
+import { Trash, User, TextAlignLeft, Lightning, ChartBar, IconContext, Link, DotsSixVertical, Code, Video } from '@phosphor-icons/react';
 import { Reorder, useDragControls } from 'framer-motion';
 
 interface SectionBuilderProps {
@@ -25,6 +27,8 @@ function getSectionIcon(type: SectionType) {
     case 'stats': return <ChartBar />;
     case 'badges': return <IconContext.Provider value={{ weight: 'duotone' }}><Lightning /></IconContext.Provider>;
     case 'socials': return <Link />;
+    case 'techstack': return <Code weight="duotone" />;
+    case 'streaming': return <Video weight="duotone" />;
   }
 }
 
@@ -42,6 +46,10 @@ function getSectionEditor(section: Section, onChange: (data: any) => void) {
       return <BadgesEditor data={section.data as any} onChange={onChange} />;
     case 'socials':
       return <SocialsEditor data={section.data as any} onChange={onChange} />;
+    case 'techstack':
+      return <TechStackEditor data={section.data as any} onChange={onChange} />;
+    case 'streaming':
+      return <StreamingEditor data={section.data as any} onChange={onChange} />;
   }
 }
 
