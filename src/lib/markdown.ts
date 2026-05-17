@@ -70,22 +70,27 @@ function generateStats(data: any): string {
   const theme = data.theme || 'radical';
   let md = '## GitHub Stats\n\n';
   
+  const images: string[] = [];
+  
   if (data.showStats) {
-    md += `<p align="center">\n`;
-    md += `  <img src="https://github-readme-stats.vercel.app/api?username=${data.username}&show_icons=true&theme=${theme}" alt="GitHub Stats" />\n`;
-    md += `</p>\n\n`;
+    const statsUrl = `https://github-readme-stats.vercel.app/api?username=${encodeURIComponent(data.username)}&show_icons=true&theme=${encodeURIComponent(theme)}&hide_border=false&count_private=true`;
+    images.push(`![GitHub Stats](${statsUrl})`);
   }
   
   if (data.showStreak) {
-    md += `<p align="center">\n`;
-    md += `  <img src="https://github-readme-streak-stats.herokuapp.com/?user=${data.username}&theme=${theme}" alt="GitHub Streak" />\n`;
-    md += `</p>\n\n`;
+    const streakUrl = `https://github-readme-streak-stats.herokuapp.com/?user=${encodeURIComponent(data.username)}&theme=${encodeURIComponent(theme)}&hide_border=false`;
+    images.push(`![GitHub Streak](${streakUrl})`);
   }
   
   if (data.showLanguages) {
-    md += `<p align="center">\n`;
-    md += `  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${data.username}&layout=compact&theme=${theme}" alt="Top Languages" />\n`;
-    md += `</p>\n`;
+    const langsUrl = `https://github-readme-stats.vercel.app/api/top-langs/?username=${encodeURIComponent(data.username)}&layout=compact&theme=${encodeURIComponent(theme)}&hide_border=false`;
+    images.push(`![Top Languages](${langsUrl})`);
+  }
+  
+  if (images.length > 0) {
+    md += '<div align="center">\n\n';
+    md += images.join('\n\n');
+    md += '\n\n</div>';
   }
   
   return md;
