@@ -246,9 +246,9 @@ function generateStreaming(data: any): string {
     md += '### Channels\n\n';
     data.channels.forEach((channel: { platform: string; url: string; username: string }) => {
       if (channel.platform === 'YouTube') {
-        md += `[![YouTube](https://img.shields.io/youtube/channel/subscribers/${channel.username}?label=${encodeURIComponent(channel.platform)}&style=social)](${channel.url})\n`;
+        md += `[![YouTube](https://img.shields.io/youtube/channel/subscribers/${encodeURIComponent(channel.username)}?style=social&label=YouTube&labelColor=red)](${channel.url})\n`;
       } else if (channel.platform === 'Twitch') {
-        md += `[![Twitch](https://img.shields.io/twitch/followers/${channel.username}?style=social&label=${encodeURIComponent(channel.platform)})](${channel.url})\n`;
+        md += `[![Twitch](https://img.shields.io/twitch/status/${encodeURIComponent(channel.username)}?style=social&label=Twitch)](${channel.url})\n`;
       } else {
         md += `[![${channel.platform}](https://img.shields.io/badge/${encodeURIComponent(channel.platform)}-${encodeURIComponent(channel.username)}-red?style=social)](${channel.url})\n`;
       }
