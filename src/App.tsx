@@ -6,7 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { SectionBuilder } from '@/components/SectionBuilder';
 import { PreviewPane } from '@/components/PreviewPane';
 import { generateMarkdown } from '@/lib/markdown';
-import { Copy, Download, Plus, GithubLogo } from '@phosphor-icons/react';
+import { CopySimple, DownloadSimple, GithubLogo } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -144,11 +144,11 @@ function App() {
 
           <div className="flex gap-4 mb-6">
             <Button onClick={copyToClipboard} disabled={currentSections.length === 0} className="gap-2">
-              <Copy weight="bold" />
+              <CopySimple weight="bold" />
               Copy Markdown
             </Button>
             <Button onClick={downloadFile} disabled={currentSections.length === 0} variant="outline" className="gap-2">
-              <Download weight="bold" />
+              <DownloadSimple weight="bold" />
               Download
             </Button>
           </div>

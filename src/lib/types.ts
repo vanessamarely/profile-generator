@@ -29,6 +29,8 @@ export const sectionTemplates = {
       name: '',
       tagline: '',
       bannerUrl: '',
+      githubUsername: '',
+      showGithubProfile: false,
     }
   },
   about: {
@@ -36,6 +38,8 @@ export const sectionTemplates = {
     description: 'Bio and introduction',
     defaultData: {
       content: '',
+      githubUsername: '',
+      showGithubProfile: false,
     }
   },
   skills: {

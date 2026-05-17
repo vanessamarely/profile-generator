@@ -38,20 +38,48 @@ function generateHeader(data: any): string {
     md += `![Banner](${data.bannerUrl})\n\n`;
   }
   
-  if (data.name) {
-    md += `# ${data.name}\n\n`;
-  }
-  
-  if (data.tagline) {
-    md += `### ${data.tagline}\n`;
+  if (data.showGithubProfile && data.githubUsername) {
+    md += '<div align="center">\n\n';
+    md += `[![GitHub Profile](https://github.com/${encodeURIComponent(data.githubUsername)}.png?size=150)](https://github.com/${encodeURIComponent(data.githubUsername)})\n\n`;
+    if (data.name) {
+      md += `# ${data.name}\n\n`;
+    }
+    if (data.tagline) {
+      md += `### ${data.tagline}\n\n`;
+    }
+    md += `[@${data.githubUsername}](https://github.com/${encodeURIComponent(data.githubUsername)})\n\n`;
+    md += '</div>';
+  } else {
+    if (data.name) {
+      md += `# ${data.name}\n\n`;
+    }
+    if (data.tagline) {
+      md += `### ${data.tagline}\n`;
+    }
   }
   
   return md;
 }
 
 function generateAbout(data: any): string {
-  if (!data.content) return '';
-  return `## About Me\n\n${data.content}`;
+  if (!data.content && !data.showGithubProfile) return '';
+  
+  let md = '## About Me\n\n';
+  
+  if (data.showGithubProfile && data.githubUsername) {
+    md += '<div align="left">\n\n';
+    md += `<img align="right" src="https://github.com/${encodeURIComponent(data.githubUsername)}.png?size=150" alt="${data.githubUsername}" width="150" style="border-radius: 50%;" />\n\n`;
+    if (data.content) {
+      md += `${data.content}\n\n`;
+    }
+    md += `**GitHub:** [@${data.githubUsername}](https://github.com/${encodeURIComponent(data.githubUsername)})\n\n`;
+    md += '</div>\n\n';
+    md += '<br clear="right"/>';
+  } else if (data.content) {
+    md += data.content;
+  }
+  
+  return md;
 }
 
 function generateSkills(data: any): string {

@@ -13,7 +13,7 @@ import { StreamingEditor } from '@/components/editors/StreamingEditor';
 import { TrophyEditor } from '@/components/editors/TrophyEditor';
 import { ContributionsEditor } from '@/components/editors/ContributionsEditor';
 import { CertificationsEditor } from '@/components/editors/CertificationsEditor';
-import { Trash, User, TextAlignLeft, Lightning, ChartBar, Link, DotsSixVertical, Code, Video, Trophy, ChartLine, Certificate } from '@phosphor-icons/react';
+import { Trash, UserCircle, Article, Lightning, ChartBar, LinkSimple, DotsSixVertical, Code, VideoCamera, Trophy, ChartLine, Certificate } from '@phosphor-icons/react';
 import { Reorder, useDragControls } from 'framer-motion';
 
 interface SectionBuilderProps {
@@ -24,14 +24,14 @@ interface SectionBuilderProps {
 
 function getSectionIcon(type: SectionType) {
   switch (type) {
-    case 'header': return <User />;
-    case 'about': return <TextAlignLeft />;
+    case 'header': return <UserCircle />;
+    case 'about': return <Article />;
     case 'skills': return <Lightning />;
     case 'stats': return <ChartBar />;
     case 'badges': return <Lightning weight="duotone" />;
-    case 'socials': return <Link />;
+    case 'socials': return <LinkSimple />;
     case 'techstack': return <Code weight="duotone" />;
-    case 'streaming': return <Video weight="duotone" />;
+    case 'streaming': return <VideoCamera weight="duotone" />;
     case 'trophy': return <Trophy weight="duotone" />;
     case 'contributions': return <ChartLine weight="duotone" />;
     case 'certifications': return <Certificate weight="duotone" />;
