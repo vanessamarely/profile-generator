@@ -71,15 +71,21 @@ function generateStats(data: any): string {
   let md = '## GitHub Stats\n\n';
   
   if (data.showStats) {
-    md += `![GitHub Stats](https://github-readme-stats.vercel.app/api?username=${data.username}&show_icons=true&theme=${theme})\n\n`;
+    md += `<p align="center">\n`;
+    md += `  <img src="https://github-readme-stats.vercel.app/api?username=${data.username}&show_icons=true&theme=${theme}" alt="GitHub Stats" />\n`;
+    md += `</p>\n\n`;
   }
   
   if (data.showStreak) {
-    md += `![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=${data.username}&theme=${theme})\n\n`;
+    md += `<p align="center">\n`;
+    md += `  <img src="https://github-readme-streak-stats.herokuapp.com/?user=${data.username}&theme=${theme}" alt="GitHub Streak" />\n`;
+    md += `</p>\n\n`;
   }
   
   if (data.showLanguages) {
-    md += `![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=${data.username}&layout=compact&theme=${theme})\n`;
+    md += `<p align="center">\n`;
+    md += `  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${data.username}&layout=compact&theme=${theme}" alt="Top Languages" />\n`;
+    md += `</p>\n`;
   }
   
   return md;
