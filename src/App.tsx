@@ -60,10 +60,15 @@ function App() {
       const a = document.createElement('a');
       a.href = url;
       a.download = 'README.md';
+      a.style.display = 'none';
       document.body.appendChild(a);
       a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
+      
       toast.success('Downloaded README.md');
     } catch (err) {
       toast.error('Failed to download file');
