@@ -27,11 +27,11 @@ A dynamic GitHub README profile generator that helps users create personalized, 
 - **Success criteria**: Preview updates within 100ms of input change, accurately represents GitHub's markdown rendering
 
 ### Content Customization
-- **Functionality**: Input fields for name, tagline, bio, skills list, social links, badge selections, and GitHub stats with automatic username detection
-- **Purpose**: Personalizes the profile with user-specific information while reducing manual entry through smart defaults
-- **Trigger**: User types in input fields, selects from dropdowns, or clicks the "Use my username" button in stats section
-- **Progression**: Focus input → Enter text OR click auto-fill → See formatted result in preview → Refine content
-- **Success criteria**: All inputs persist during session, support common markdown enhancements, validate URLs, automatically populate GitHub username when stats section is added
+- **Functionality**: Input fields for name, tagline, bio, skills list, social links, badge selections, and GitHub stats with automatic username detection and customizable theme styles (dark mode, gradient, neon)
+- **Purpose**: Personalizes the profile with user-specific information while reducing manual entry through smart defaults and visual theme selection
+- **Trigger**: User types in input fields, selects from dropdowns, clicks the "Use my username" button in stats section, or selects a theme style for GitHub stats
+- **Progression**: Focus input → Enter text OR click auto-fill → Select theme style from visual options → See formatted result in preview → Refine content
+- **Success criteria**: All inputs persist during session, support common markdown enhancements, validate URLs, automatically populate GitHub username when stats section is added, theme selection updates preview immediately with visual feedback
 
 ### Export Options
 - **Functionality**: Copy markdown to clipboard or download as README.md file
@@ -79,7 +79,7 @@ Animations should feel snappy and purposeful, reinforcing the immediate feedback
 - **Components**: 
   - Card for section builders and preview container
   - Input, Textarea, Label for form fields
-  - Button (primary for add section, secondary for remove)
+  - Button (primary for add section, secondary for remove, custom theme selector buttons)
   - Accordion for collapsible section editors
   - Tabs for switching between edit/preview on mobile
   - Scroll-area for long preview content
@@ -93,9 +93,11 @@ Animations should feel snappy and purposeful, reinforcing the immediate feedback
   - Custom section selector grid with icon + label cards
   - Custom markdown preview renderer with syntax highlighting
   - Badge input component with tag-style addition/removal
+  - Custom theme selector with visual preview cards for GitHub stats (dark mode, gradient, neon)
   
 - **States**: 
   - Buttons: Hover lifts with shadow, active scales down 98%, disabled reduces opacity 40%
+  - Theme selector: Selected state shows accent border and filled icon, hover shows subtle background
   - Inputs: Focus shows cyan ring, error state shows red border with shake animation
   - Sections: Hover shows drag handle, active dragging reduces opacity 60%
   - Preview: Updating state shows subtle shimmer overlay
@@ -110,6 +112,9 @@ Animations should feel snappy and purposeful, reinforcing the immediate feedback
   - Eye (preview toggle)
   - GithubLogo (social/stats)
   - User (profile sections, auto-fill username in stats)
+  - Moon (dark mode theme)
+  - Gradient (gradient theme)
+  - Lightning (neon theme)
   
 - **Spacing**: 
   - Container padding: p-6 (24px)

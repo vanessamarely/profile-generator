@@ -57,18 +57,19 @@ function generateSkills(data: any): string {
 function generateStats(data: any): string {
   if (!data.username) return '';
   
+  const theme = data.theme || 'radical';
   let md = '## GitHub Stats\n\n';
   
   if (data.showStats) {
-    md += `![GitHub Stats](https://github-readme-stats.vercel.app/api?username=${data.username}&show_icons=true&theme=radical)\n\n`;
+    md += `![GitHub Stats](https://github-readme-stats.vercel.app/api?username=${data.username}&show_icons=true&theme=${theme})\n\n`;
   }
   
   if (data.showStreak) {
-    md += `![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=${data.username}&theme=radical)\n\n`;
+    md += `![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=${data.username}&theme=${theme})\n\n`;
   }
   
   if (data.showLanguages) {
-    md += `![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=${data.username}&layout=compact&theme=radical)\n`;
+    md += `![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=${data.username}&layout=compact&theme=${theme})\n`;
   }
   
   return md;

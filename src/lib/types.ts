@@ -48,6 +48,7 @@ export const sectionTemplates = {
       showStats: true,
       showStreak: true,
       showLanguages: true,
+      theme: 'radical',
     }
   },
   badges: {
