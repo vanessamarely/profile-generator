@@ -64,7 +64,7 @@ export const sectionTemplates = {
     name: 'Social Links',
     description: 'Contact and profiles',
     defaultData: {
-      links: [] as { platform: string; url: string }[],
+      links: [] as { platform: string; url: string; username?: string }[],
     }
   },
   techstack: {

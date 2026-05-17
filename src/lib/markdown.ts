@@ -93,11 +93,34 @@ function generateBadges(data: any): string {
 function generateSocials(data: any): string {
   if (!data.links || data.links.length === 0) return '';
   
-  const linkList = data.links.map((link: { platform: string; url: string }) => 
-    `- [${link.platform}](${link.url})`
-  ).join('\n');
+  const platformConfig: Record<string, { badge: string; color: string; logo?: string }> = {
+    'Twitter': { badge: 'Twitter', color: '1DA1F2', logo: 'twitter' },
+    'LinkedIn': { badge: 'LinkedIn', color: '0077B5', logo: 'linkedin' },
+    'GitHub': { badge: 'GitHub', color: '181717', logo: 'github' },
+    'Medium': { badge: 'Medium', color: '12100E', logo: 'medium' },
+    'Dev.to': { badge: 'Dev.to', color: '0A0A0A', logo: 'devdotto' },
+    'YouTube': { badge: 'YouTube', color: 'FF0000', logo: 'youtube' },
+    'Twitch': { badge: 'Twitch', color: '9146FF', logo: 'twitch' },
+    'Instagram': { badge: 'Instagram', color: 'E4405F', logo: 'instagram' },
+    'Facebook': { badge: 'Facebook', color: '1877F2', logo: 'facebook' },
+    'Discord': { badge: 'Discord', color: '5865F2', logo: 'discord' },
+    'Website': { badge: 'Website', color: '4A90E2', logo: 'googlechrome' },
+    'Blog': { badge: 'Blog', color: 'FF5722', logo: 'blogger' },
+    'Portfolio': { badge: 'Portfolio', color: '000000', logo: 'aboutdotme' },
+    'Email': { badge: 'Email', color: 'D14836', logo: 'gmail' },
+  };
   
-  return `## Connect With Me\n\n${linkList}`;
+  const linkList = data.links.map((link: { platform: string; url: string; username?: string }) => {
+    const config = platformConfig[link.platform] || { badge: link.platform, color: '000000' };
+    const label = link.username ? `@${link.username}` : config.badge;
+    const badgeUrl = config.logo 
+      ? `https://img.shields.io/badge/${encodeURIComponent(label)}-${config.color}?style=for-the-badge&logo=${config.logo}&logoColor=white`
+      : `https://img.shields.io/badge/${encodeURIComponent(label)}-${config.color}?style=for-the-badge`;
+    
+    return `[![${link.platform}](${badgeUrl})](${link.url})`;
+  }).join('\n');
+  
+  return `## 📫 Connect With Me\n\n${linkList}`;
 }
 
 function generateTechStack(data: any): string {

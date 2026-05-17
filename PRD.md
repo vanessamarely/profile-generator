@@ -13,7 +13,7 @@ A dynamic GitHub README profile generator that helps users create personalized, 
 ## Essential Features
 
 ### Section Management
-- **Functionality**: Add, remove, reorder, and customize profile sections (header, about me, skills, GitHub stats, badges, social links)
+- **Functionality**: Add, remove, reorder, and customize profile sections (header, about me, skills, GitHub stats, badges, social links with images, tech stack code view, streaming/video channels)
 - **Purpose**: Allows users to build a personalized profile structure that reflects their unique developer identity
 - **Trigger**: User clicks section buttons in the builder panel
 - **Progression**: Select section type → Configure section content via form → See live preview update → Adjust styling/content → Continue adding sections
@@ -27,18 +27,18 @@ A dynamic GitHub README profile generator that helps users create personalized, 
 - **Success criteria**: Preview updates within 100ms of input change, accurately represents GitHub's markdown rendering
 
 ### Content Customization
-- **Functionality**: Input fields for name, tagline, bio, skills list, social links, badge selections, and GitHub stats with automatic username detection and customizable theme styles (dark mode, gradient, neon)
-- **Purpose**: Personalizes the profile with user-specific information while reducing manual entry through smart defaults and visual theme selection
-- **Trigger**: User types in input fields, selects from dropdowns, clicks the "Use my username" button in stats section, or selects a theme style for GitHub stats
-- **Progression**: Focus input → Enter text OR click auto-fill → Select theme style from visual options → See formatted result in preview → Refine content
-- **Success criteria**: All inputs persist during session, support common markdown enhancements, validate URLs, automatically populate GitHub username when stats section is added, theme selection updates preview immediately with visual feedback
+- **Functionality**: Input fields for name, tagline, bio, skills list, social links with platform-specific badges and icons, badge selections, personal websites/blog URLs, and GitHub stats with automatic username detection and customizable theme styles (dark mode, gradient, neon)
+- **Purpose**: Personalizes the profile with user-specific information while reducing manual entry through smart defaults, visual theme selection, and professional-looking social badges
+- **Trigger**: User types in input fields, selects from dropdowns, clicks the "Use my username" button in stats section, selects social platform from predefined list, or selects a theme style for GitHub stats
+- **Progression**: Focus input → Enter text OR click auto-fill → Select platform (Twitter, LinkedIn, GitHub, Medium, Dev.to, YouTube, etc.) → Add username if required → Select theme style from visual options → See formatted result with colorful badges in preview → Refine content
+- **Success criteria**: All inputs persist during session, support common markdown enhancements, validate URLs, automatically populate GitHub username when stats section is added, theme selection updates preview immediately with visual feedback, social links display with proper logos and colors
 
 ### Export Options
-- **Functionality**: Copy markdown to clipboard or download as README.md file
+- **Functionality**: Copy markdown to clipboard or download as README.md file with proper error handling
 - **Purpose**: Makes it easy to transfer the generated content to GitHub
 - **Trigger**: User clicks "Copy" or "Download" button
-- **Progression**: Click export button → Feedback confirmation → Paste into GitHub or save file
-- **Success criteria**: Markdown copies correctly with formatting, download creates valid .md file, success toast appears
+- **Progression**: Click export button → Content generates → File downloads or clipboard updates → Feedback confirmation → Paste into GitHub or save file
+- **Success criteria**: Markdown copies correctly with formatting, download creates valid .md file with proper charset encoding, success toast appears, download handles errors gracefully
 
 ## Edge Case Handling
 - **Empty Sections**: Display placeholder text guiding users to fill in content rather than showing blank areas

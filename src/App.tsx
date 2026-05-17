@@ -53,17 +53,25 @@ function App() {
   };
 
   const downloadFile = () => {
-    const markdown = generateMarkdown(currentSections);
-    const blob = new Blob([markdown], { type: 'text/markdown' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'README.md';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded README.md');
+    try {
+      const markdown = generateMarkdown(currentSections);
+      const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'README.md';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
+      toast.success('Downloaded README.md');
+    } catch (err) {
+      toast.error('Failed to download file');
+      console.error('Download error:', err);
+    }
   };
 
   const sectionTypes = Object.entries(sectionTemplates);
