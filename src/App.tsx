@@ -26,7 +26,6 @@ function App() {
   const currentSections = sections || [];
   const addSection = (type: SectionType) => {
     const newSection: Section = {
-    const newSection: Section = {
       id: `${type}-${Date.now()}`,
       type,
       data: { ...sectionTemplates[type].defaultData },
