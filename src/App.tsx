@@ -24,8 +24,8 @@ function App() {
   const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
 
   const currentSections = sections || [];
-
   const addSection = (type: SectionType) => {
+    const newSection: Section = {
     const newSection: Section = {
       id: `${type}-${Date.now()}`,
       type,
