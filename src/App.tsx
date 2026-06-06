@@ -14,9 +14,12 @@ import { Toaster } from '@/components/ui/sonner';
 import { Reorder } from 'framer-motion';
 import { MarkdownPreviewDialog } from '@/components/MarkdownPreviewDialog';
 import { useState } from 'react';
+import { useLanguage } from '@/hooks/use-language';
+import { LanguageSelector } from '@/components/LanguageSelector';
 
 function App() {
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
   const [sections, setSections] = useKV<Section[]>('readme-sections', []);
   const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
 
@@ -29,7 +32,7 @@ function App() {
       data: { ...sectionTemplates[type].defaultData },
     };
     setSections((current) => [...(current || []), newSection]);
-    toast.success('Section added');
+    toast.success(t.notifications.sectionAdded);
   };
 
   const updateSection = (id: string, data: any) => {
@@ -42,16 +45,16 @@ function App() {
 
   const removeSection = (id: string) => {
     setSections((current) => (current || []).filter((section) => section.id !== id));
-    toast.success('Section removed');
+    toast.success(t.notifications.sectionRemoved);
   };
 
   const copyToClipboard = async () => {
     const markdown = generateMarkdown(currentSections);
     try {
       await navigator.clipboard.writeText(markdown);
-      toast.success('Copied to clipboard!');
+      toast.success(t.notifications.copied);
     } catch (err) {
-      toast.error('Failed to copy');
+      toast.error(t.notifications.copyFailed);
     }
   };
 
@@ -68,7 +71,7 @@ function App() {
   const editorContent = (
     <div className="space-y-4">
       <Card className="p-5">
-        <h3 className="text-sm font-semibold uppercase tracking-wide mb-3">Add Section</h3>
+        <h3 className="text-sm font-semibold uppercase tracking-wide mb-3">{t.sections.addSection}</h3>
         <div className="grid grid-cols-2 gap-2">
           {sectionTypes.map(([type, template]) => (
             <Button
@@ -78,8 +81,8 @@ function App() {
               className="justify-start h-auto py-3 px-4"
             >
               <div className="text-left">
-                <div className="font-medium">{template.name}</div>
-                <div className="text-xs text-muted-foreground">{template.description}</div>
+                <div className="font-medium">{t.sections[type as SectionType]?.name || template.name}</div>
+                <div className="text-xs text-muted-foreground">{t.sections[type as SectionType]?.description || template.description}</div>
               </div>
             </Button>
           ))}
@@ -100,9 +103,9 @@ function App() {
       {currentSections.length === 0 && (
         <Card className="p-12 text-center">
           <div className="max-w-sm mx-auto">
-            <h3 className="text-lg font-semibold mb-2">Start Building Your README</h3>
+            <h3 className="text-lg font-semibold mb-2">{t.sections.startBuilding}</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Add sections above to create your personalized GitHub profile
+              {t.sections.startBuildingDesc}
             </p>
           </div>
         </Card>
@@ -116,23 +119,26 @@ function App() {
       <div className="bg-gradient-to-br from-primary/10 via-background to-accent/5">
         <div className="container mx-auto px-6 py-8">
           <header className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <GithubLogo size={36} weight="duotone" className="text-accent" />
-              <h1 className="text-3xl font-bold tracking-tight">README Profile Generator</h1>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+                <GithubLogo size={36} weight="duotone" className="text-accent" />
+                <h1 className="text-3xl font-bold tracking-tight">{t.app.title}</h1>
+              </div>
+              <LanguageSelector />
             </div>
             <p className="text-muted-foreground">
-              Create a stunning GitHub profile README with live preview
+              {t.app.subtitle}
             </p>
           </header>
 
           <div className="flex gap-4 mb-6">
             <Button onClick={copyToClipboard} disabled={currentSections.length === 0} className="gap-2">
               <CopySimple weight="bold" />
-              Copy Markdown
+              {t.actions.copy}
             </Button>
             <Button onClick={openPreviewDialog} disabled={currentSections.length === 0} variant="outline" className="gap-2">
               <DownloadSimple weight="bold" />
-              Download
+              {t.actions.download}
             </Button>
           </div>
 
@@ -145,8 +151,8 @@ function App() {
           {isMobile ? (
             <Tabs defaultValue="edit" className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-4">
-                <TabsTrigger value="edit">Edit</TabsTrigger>
-                <TabsTrigger value="preview">Preview</TabsTrigger>
+                <TabsTrigger value="edit">{t.tabs.edit}</TabsTrigger>
+                <TabsTrigger value="preview">{t.tabs.preview}</TabsTrigger>
               </TabsList>
               <TabsContent value="edit">
                 <ScrollArea className="h-[calc(100vh-280px)]">
