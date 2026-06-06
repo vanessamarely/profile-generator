@@ -19,6 +19,13 @@ A dynamic GitHub README profile generator that helps users create personalized, 
 - **Progression**: Select section type → Configure section content via form → See live preview update → Adjust styling/content → Continue adding sections
 - **Success criteria**: Sections appear in preview immediately, can be reordered via drag handles, and removed individually
 
+### Open Source Documentation
+- **Functionality**: Comprehensive contribution guidelines (CONTRIBUTING.md) and detailed project README explaining the tool, its features, technical architecture, and how to contribute
+- **Purpose**: Enable community contributions by providing clear guidelines, code standards, project structure documentation, and development setup instructions in Spanish and English
+- **Trigger**: Contributors visit repository and read documentation files
+- **Progression**: Read README to understand project → Review CONTRIBUTING.md for guidelines → Set up development environment → Choose issue or feature → Follow PR process → Submit contribution
+- **Success criteria**: Documentation is clear, comprehensive, includes code examples, covers all contribution types (bugs, features, docs), explains technical stack, and lowers barrier to entry for new contributors
+
 ### Live Markdown Preview
 - **Functionality**: Real-time rendering of the generated markdown as it would appear on GitHub
 - **Purpose**: Eliminates guesswork by showing exactly what the final profile will look like
